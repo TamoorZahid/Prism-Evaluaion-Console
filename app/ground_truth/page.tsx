@@ -48,7 +48,6 @@ import { useToast } from "@/hooks/use-toast";
 import { useGroundTruthStore, type GroundTruth } from "@/lib/stores";
 import {
   Search,
-  Plus,
   Edit,
   Copy,
   Download,
@@ -106,9 +105,6 @@ export default function GroundTruthPage() {
   const [uplHeaders, setUplHeaders] = useState<string[]>([]);
   const [uplSchemaMap, setUplSchemaMap] = useState<SchemaMap>({});
   const [uplRowCount, setUplRowCount] = useState<number>(0);
-  const [uplSampleRows, setUplSampleRows] = useState<
-    Array<{ index: number; question: string; answer: string; meta?: any }>
-  >([]);
 
   // Back navigation + preselect from URL
   const backRef = searchParams.get("backRef") || "/evaluation/setup";
@@ -358,7 +354,6 @@ export default function GroundTruthPage() {
     setUplHeaders([]);
     setUplRowCount(0);
     setUplSchemaMap({});
-    setUplSampleRows([]);
 
     if (!file) return;
 
@@ -479,7 +474,6 @@ export default function GroundTruthPage() {
     setUplHeaders([]);
     setUplRowCount(0);
     setUplSchemaMap({});
-    setUplSampleRows([]);
     setShowUploadDialog(false);
 
     toast({
@@ -1037,8 +1031,9 @@ export default function GroundTruthPage() {
                                     Delete Ground Truth
                                   </AlertDialogTitle>
                                   <AlertDialogDescription>
-                                    Are you sure you want to delete "{gt.name}"?
-                                    This action cannot be undone.
+                                    Are you sure you want to delete &quot;
+                                    {gt.name}&quot;? This action cannot be
+                                    undone.
                                   </AlertDialogDescription>
                                 </AlertDialogHeader>
                                 <AlertDialogFooter>

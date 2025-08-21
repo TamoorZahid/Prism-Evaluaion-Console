@@ -24,15 +24,10 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Play, Info, CheckCircle2 } from "lucide-react";
 import { mockAgents, mockRecentEvaluations } from "@/data/mock-data";
-import type {
-  Agent,
-  GroundTruthDataset,
-  EvaluationMetrics,
-} from "@/types/evaluation";
+import type { Agent, EvaluationMetrics } from "@/types/evaluation";
 import { MetricsSummary } from "@/components/metrics-summary";
 import { useToast } from "@/hooks/use-toast";
 import { HelpTooltip } from "@/components/help-tooltip";
-import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { useSetupStore } from "@/lib/stores";
 
 const PHAROS_REGIONS = [
@@ -58,12 +53,9 @@ export default function EvaluationSetupPage() {
 
   const [selectedAgent, setSelectedAgent] = useState<Agent | null>(null);
 
-  const [selectedDataset, setSelectedDataset] =
-    useState<GroundTruthDataset | null>(null);
   const [lastMetrics, setLastMetrics] = useState<EvaluationMetrics | null>(
     null
   );
-  const [isLoading, setIsLoading] = useState(false);
   const [validationStatus, setValidationStatus] = useState<
     "idle" | "validating" | "valid" | "invalid"
   >("idle");
@@ -80,18 +72,7 @@ export default function EvaluationSetupPage() {
     }
   }, [selectedAgent]);
 
-  // Added real-time form validation
-  useEffect(() => {
-    const errors = validateForm();
-    if (errors.length === 0 && selectedAgent && evaluationType) {
-      setValidationStatus("valid");
-    } else if (selectedAgent) {
-      setValidationStatus("invalid");
-    } else {
-      setValidationStatus("idle");
-    }
-  }, [selectedAgent, region, evaluationType]);
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const validateForm = (): string[] => {
     const newErrors: string[] = [];
 
@@ -104,9 +85,19 @@ export default function EvaluationSetupPage() {
     return newErrors;
   };
 
-  const handleGoToGroundTruth = async () => {
-    setIsLoading(true);
+  // Added real-time form validation
+  useEffect(() => {
+    const errors = validateForm();
+    if (errors.length === 0 && selectedAgent && evaluationType) {
+      setValidationStatus("valid");
+    } else if (selectedAgent) {
+      setValidationStatus("invalid");
+    } else {
+      setValidationStatus("idle");
+    }
+  }, [selectedAgent, region, evaluationType, validateForm]);
 
+  const handleGoToGroundTruth = async () => {
     // Enhanced loading simulation with progress updates
     toast({
       title: "Initializing evaluation...",
@@ -193,7 +184,6 @@ export default function EvaluationSetupPage() {
               onValueChange={(value) => {
                 const agent = mockAgents.find((a) => a.id === value) || null;
                 setSelectedAgent(agent);
-                setSelectedDataset(null);
 
                 const newAgentIds = agent ? [agent.id] : [];
                 setSelectedAgentIds(newAgentIds);

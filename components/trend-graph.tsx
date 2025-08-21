@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   LineChart,
@@ -31,7 +30,6 @@ const metricOptions = [
 ] as const;
 
 export function TrendGraph({ runs, className }: TrendGraphProps) {
-  const [selectedRunCount, setSelectedRunCount] = useState(10); // 1..10
   const [selectedMetrics, setSelectedMetrics] = useState<string[]>([
     "Answer_Correctness",
   ]);
@@ -44,7 +42,7 @@ export function TrendGraph({ runs, className }: TrendGraphProps) {
   }, [runs]);
 
   const chartData = useMemo(() => {
-    const slice = experimentalSorted.slice(0, selectedRunCount).reverse();
+    const slice = experimentalSorted.slice(0).reverse();
     return slice.map((r, idx) => {
       const base: any = {
         run: idx + 1,
@@ -57,7 +55,7 @@ export function TrendGraph({ runs, className }: TrendGraphProps) {
       }
       return base;
     });
-  }, [experimentalSorted, selectedRunCount]);
+  }, [experimentalSorted]);
 
   const experimentalCount = experimentalSorted.length;
   const hasExperiments = experimentalCount > 0;
@@ -120,10 +118,6 @@ export function TrendGraph({ runs, className }: TrendGraphProps) {
             <TrendingUp className="h-5 w-5 mr-2 text-blue-600" />
             Performance Trends
           </CardTitle>
-          {/* <Badge variant="outline" className="text-xs">
-            {Math.min(selectedRunCount, experimentalCount)} /{" "}
-            {experimentalCount} experiments
-          </Badge> */}
         </div>
       </CardHeader>
       <CardContent className="space-y-4 pb-2">

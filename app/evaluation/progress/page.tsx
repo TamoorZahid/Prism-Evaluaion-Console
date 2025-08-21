@@ -16,7 +16,6 @@ import {
   Brain,
   BarChart3,
 } from "lucide-react";
-import { DemoBanner } from "@/components/demo-banner";
 
 export default function EvaluationProgressPage() {
   const router = useRouter();

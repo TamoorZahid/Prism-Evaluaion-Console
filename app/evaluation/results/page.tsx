@@ -79,8 +79,6 @@ export default function EvaluationResultsPage() {
   // Effective agent & type for data loading
   const effectiveAgent =
     (fromProgress ? agentFromQuery : selectedAgent) || undefined;
-  const effectiveType =
-    (fromProgress ? (evalTypeFromQuery as string) : "POINTWISE") || "POINTWISE";
 
   useEffect(() => {
     // If direct entry and no agent chosen yet: stop here (show selector UI)
@@ -157,14 +155,7 @@ export default function EvaluationResultsPage() {
           total_questions: 100,
           timestamp: last?.timestamp ?? fallbackTimestamp,
           file_path: "/mock/latest.csv",
-          aggregated_results: last
-            ? {
-                Answer_Correctness: last.Answer_Correctness,
-                Answer_Relevancy: last.Answer_Relevancy,
-                Coherence: last.Coherence,
-                Conciseness: last.Conciseness,
-              }
-            : mockAggregatedResults.aggregated_results,
+          aggregated_results: mockAggregatedResults.aggregated_results,
           detailed_results: mockDetailedResults.detailed_results,
         };
       }

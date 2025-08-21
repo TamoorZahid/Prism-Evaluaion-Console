@@ -73,7 +73,7 @@ interface GroundTruthState {
 
 export const useGroundTruthStore = create<GroundTruthState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       groundTruths: [
         {
           id: "hr-qa-basic",
