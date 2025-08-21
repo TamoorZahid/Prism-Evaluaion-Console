@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NBCU Console
 
-## Getting Started
+A **Next.js 15.4.5** + **React 19** application built with **TypeScript**, **TailwindCSS 4**, and modern UI/state libraries such as **Radix UI**, **Zustand**, **Recharts**, and **Lucide Icons**.  
+This project serves as a console-style web app and is ready for local development or production deployment.
 
-First, run the development server:
+---
+
+## 🚀 Getting Started
+
+### 1. Prerequisites
+
+- **Node.js**: version **18.20.0 or newer**  
+  👉 Check your version:
+  ```bash
+  node -v
+  ```
+
+- **npm** (comes with Node.js)  
+  You can also use `yarn`, `pnpm`, or `bun`, but all scripts here assume `npm`.
+
+- **Git** (to clone the repo)
+
+---
+
+### 2. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/nbcu-console.git
+cd nbcu-console
+```
+
+---
+
+### 3. Install Dependencies
+
+Install all required packages:
+
+```bash
+npm install
+```
+
+---
+
+### 4. Run in Development
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Now open 👉 [http://localhost:3000](http://localhost:3000) in your browser.  
+The app auto-refreshes when you save changes.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 5. Build for Production
 
-## Learn More
+Create an optimized production build:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Run the production server:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm start
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 6. Linting & Code Quality
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Check your code with ESLint:
+
+```bash
+npm run lint
+```
+
+This uses Next.js’ recommended rules plus TypeScript support (`eslint.config.mjs`).
+
+---
+
+## 🛠 Tech Stack
+
+- **Next.js 15.4.5**  
+- **React 19 / ReactDOM 19**  
+- **TypeScript 5**  
+- **TailwindCSS 4** + PostCSS  
+- **Radix UI** (labels, tooltips, selects, progress)  
+- **Zustand** (state management)  
+- **Recharts** (charts)  
+- **Lucide React** (icons)  
+- **React Tabs** (tab navigation)  
+- **PapaParse** (CSV parsing)  
+
+---
+
+✅ That’s all you need to run this project locally or in production.
