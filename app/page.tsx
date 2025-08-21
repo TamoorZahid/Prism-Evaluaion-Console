@@ -1,103 +1,202 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { FeatureCard } from "@/components/ui/feature-card";
+import { Brain, Route, BookOpen, BarChart3 } from "lucide-react";
+
+export default function HomePage() {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleStartEvaluation = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      router.push("/evaluation/setup");
+    }, 800);
+  };
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+    <div
+      className="
+        relative min-h-screen overflow-hidden
+        bg-gradient-to-b from-slate-50 via-slate-100 to-slate-200
+        dark:from-slate-950 dark:via-slate-900 dark:to-slate-950
+      "
+    >
+      {/* --- Background glows & grid (decorative only) --- */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        {/* subtle dot grid */}
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.10] dark:opacity-[0.15]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 1px 1px, rgba(0,0,0,0.25) 1px, transparent 1px)",
+            backgroundSize: "22px 22px",
+          }}
         />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+        {/* purple/indigo glow (top-left) */}
+        <div
+          aria-hidden
+          className="
+            absolute -top-32 -left-28 h-[42rem] w-[42rem] rounded-full
+            blur-3xl
+            bg-[radial-gradient(45rem_45rem_at_30%_20%,#8b5cf6_0%,#3b82f6_30%,transparent_60%)]
+            opacity-20 mix-blend-multiply
+            dark:opacity-40 dark:mix-blend-normal
+          "
+        />
+        {/* orange/red glow (top-right) */}
+        <div
+          aria-hidden
+          className="
+            absolute -top-24 right-[-6rem] h-[36rem] w-[36rem] rounded-full
+            blur-3xl
+            bg-[radial-gradient(40rem_40rem_at_80%_10%,#ef4444_0%,#f59e0b_28%,transparent_60%)]
+            opacity-15 mix-blend-multiply
+            dark:opacity-35 dark:mix-blend-normal
+          "
+        />
+        {/* cyan/teal glow (bottom-center) */}
+        <div
+          aria-hidden
+          className="
+            absolute bottom-[-12rem] left-1/2 -translate-x-1/2 h-[48rem] w-[64rem] rounded-full
+            blur-3xl
+            bg-[radial-gradient(50rem_50rem_at_50%_80%,#22d3ee_0%,#3b82f6_35%,transparent_65%)]
+            opacity-20 mix-blend-multiply
+            dark:opacity-40 dark:mix-blend-normal
+          "
+        />
+      </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      <div className="container mx-auto px-12 py-12 relative">
+        {/* Hero */}
+        <div className="text-center mb-10">
+          <div className="flex items-center justify-center mb-6">
+            <div className="relative">
+              <div className="absolute -top-1 -right-1 h-4 w-4 bg-green-500 rounded-full animate-ping" />
+            </div>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight">
+              {/* prism wordmark-style */}
+              <span className="inline-flex items-baseline gap-1.5 text-zinc-900 dark:text-zinc-100">
+                <span className="lowercase">pr</span>
+
+                {/* custom i (rectangle + dot) */}
+                <span
+                  className="relative inline-block align-baseline h-[0.9em] w-[0.35em]"
+                  aria-label="i"
+                >
+                  {/* stem */}
+                  <span
+                    aria-hidden
+                    className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[0.58em] w-[0.14em] rounded-sm
+                   bg-[linear-gradient(180deg,#f97316_0%,#fbbf24_100%)]"
+                  />
+                  {/* dot */}
+                  <span
+                    aria-hidden
+                    className="absolute left-1/2 -translate-x-1/2 h-[0.22em] w-[0.22em] rounded-full 
+                   bg-[linear-gradient(180deg,#ef4444_0%,#fb923c_100%)]
+                   shadow-[0_0_0_1px_rgba(0,0,0,0.08)]"
+                  />
+                  <span className="sr-only">i</span>
+                </span>
+
+                <span className="lowercase">sm</span>
+              </span>
+
+              {/* prism-gradient headline */}
+              <span
+                className="ml-2 bg-[linear-gradient(90deg,#ef4444_0%,#f59e0b_20%,#a855f7_48%,#3b82f6_72%,#06b6d4_100%)]
+               bg-clip-text text-transparent"
+              >
+                GenAI Evaluation Console
+              </span>
+            </h1>
+          </div>
+          <p className="text-xl text-slate-700 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
+            Benchmark AI agents scientifically: an impartial LLM Judge scores
+            responses against a Ground Truth answer key.
+          </p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+
+        {/* Feature cards */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          <FeatureCard
+            color="blue"
+            title="Evaluation Setup"
+            description="This is where you configure your test run. The UI will guide you through a simple, step-by-step process to prepare your evaluation."
+            icon={<Route className="h-5 w-5" />}
+            bullets={[
+              "Select Agent(s): Select one or two agents from the dropdown list.",
+              "Evaluation Type: Choose Pointwise to grade one, Pairwise to compare two.",
+              "Ground Truth: Upload CSV; LLM Judge scores; include 50–100 questions.",
+            ]}
+            badge="Guided"
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
+
+          <FeatureCard
+            color="amber"
+            title="Evaluation Results "
+            description="After you start an evaluation, the console automates the entire testing process and presents the results in a comprehensive dashboard. "
+            icon={<BarChart3 className="h-5 w-5" />}
+            bullets={[
+              "System sends questions, Judge scores every response against ground truth.",
+              "See aggregated dashboard and drill-down detailed per-question results.",
+              "Metrics include relevancy, factual correctness, coherence, and conciseness.",
+            ]}
+            badge="Clarity"
           />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
+
+          <FeatureCard
+            color="violet"
+            title="Other Information"
+            description="The entire console is designed to be a 'no-code' tool that empowers product owners and business users, not just engineers: "
+            icon={<BookOpen className="h-5 w-5" />}
+            bullets={[
+              "Guided Workflow: Step-by-step UI guides setup, simplifying even complex evaluations.",
+              "Plain-English Explanations: Clear labels and descriptions translate scores into business insights.",
+              "Interactive Glossary: Built-in glossary gives instant, simple definitions for technical terms.",
+            ]}
+            badge="Built-in help"
           />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        </div>
+
+        {/* CTA */}
+        <div className="text-center">
+          <Button
+            onClick={handleStartEvaluation}
+            disabled={isLoading}
+            size="lg"
+            className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-12 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+          >
+            {isLoading ? (
+              <>
+                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3" />
+                Initializing...
+              </>
+            ) : (
+              <>
+                <Brain className="h-5 w-5 mr-3" />
+                Start New Evaluation
+              </>
+            )}
+          </Button>
+          <div className="mt-6 space-y-2">
+            <p className="text-sm text-slate-600 dark:text-slate-400">
+              Ready for demo presentation • Simulated backend integration
+            </p>
+            <div className="flex items-center justify-center space-x-4 text-xs text-slate-500 dark:text-slate-400">
+              <span>✓ No Azure setup required</span>
+              <span>✓ Realistic data simulation</span>
+              <span>✓ Full workflow demonstration</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

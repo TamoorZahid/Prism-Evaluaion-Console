@@ -1,0 +1,18 @@
+{
+  "evaluation_id": "74041cc2-60ad-4556-ab8a-eb586c805fd1",
+  "evaluation_type": "Pointwise",
+  "agent_name": "pharos_udx",
+  "total_questions": 48,
+  "timestamp": "2025-07-14T20:51:16Z",
+  "username": null,
+  "file_path": "pointwise/pharos_udx/2025-07-14/2025-07-14T20:51:16Z_74041cc2-60ad-4556-ab8a-eb586c805fd1_pointwise_aggregated_.json",
+  "aggregated_results": {
+    "Answer_Correctness": 70.83,
+    "Answer_Relevancy": 72.92,
+    "Coherence": 85.42,
+    "Conciseness": 47.92,
+    "Ground Truth Coherence": 100.0,
+    "Ground Truth Completeness": 95.83,
+    "Ground Truth Specificity": 97.92
+  }
+}
